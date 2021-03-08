@@ -17,8 +17,8 @@ class BloggerModel(db.Model):
     index_number = db.Column(db.Float)
     cert = db.Column(db.String(50))
     likes = db.Column(db.Integer)
-    db.relationship('LiveGoodModel')
-
+    # livegoods = db.relationship('LiveGoodModel')
+    # bloggerstats = db.relationship('BloggerStatsModel')
 
 
     def __repr__(self):
@@ -32,6 +32,10 @@ class BloggerModel(db.Model):
     def get_by_id(cls, id_):
         return cls.query.filter_by(id = id_).first()
 
+
+    @classmethod
+    def getn(cls, n):
+        return cls.query.limit(n)
 
     @classmethod
     def get_tags(cls):
@@ -55,4 +59,12 @@ class BloggerModel(db.Model):
             'index_number':self.index_number,
             'cert':self.cert,
             'likes':self.likes
+        }
+
+    def json_short(self):
+        return {
+            'id':self.id,
+            'name':self.name,
+            'fans':self.fans,
+            'videos':self.videos,
         }

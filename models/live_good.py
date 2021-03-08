@@ -5,7 +5,9 @@ class LiveGoodModel(db.Model):
     __tablename__ = "base_live_goods"
 
     goods_id = db.Column(db.String(50), primary_key = True)
-    id = db.Column(db.String(50), db.ForeignKey("base_user_info.id"))
+    # id = db.Column(db.String(50), db.ForeignKey("base_user_info.id"))
+    # uid = db.Column(db.String(50), db.ForeignKey('base_live.uid'))
+    id = db.Column(db.String(50))
     uid = db.Column(db.String(50))
     create_time = db.Column(db.DateTime)
     name = db.Column(db.String(100))
@@ -18,7 +20,8 @@ class LiveGoodModel(db.Model):
     sales_count = db.Column(db.Integer)
     sales_price = db.Column(db.Float)
 
-    db.relationship('BloggerModel')
+    # db.relationship('BloggerModel')
+    # db.relationship("LiveModel")
 
 
     def __repr__(self):
@@ -39,6 +42,11 @@ class LiveGoodModel(db.Model):
         result = [a.tag for a in cls.query.with_entities(cls.tag).distinct()]
         print(result)
         return result
+
+
+    @classmethod
+    def getn(cls, n):
+        return cls.query.limit(n)
 
 
     def json(self):

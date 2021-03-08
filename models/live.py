@@ -4,6 +4,7 @@ class LiveModel(db.Model):
 
     __tablename__ = "base_live"
     id = db.Column(db.String(50))
+    # id = db.Column(db.String(50), db.ForeignKey("base_user_info.id"))
     uid = db.Column(db.String(50), primary_key = True)
     create_time = db.Column(db.DateTime)
     begin_time = db.Column(db.DateTime)
@@ -19,6 +20,8 @@ class LiveModel(db.Model):
     fans = db.Column(db.Integer)
     goods = db.Column(db.Integer)
     is_live_user = db.Column(db.Integer)
+    # db.relationship('BloggerModel')
+    # db.relationship('LiveGoodModel')
 
 
     @classmethod
